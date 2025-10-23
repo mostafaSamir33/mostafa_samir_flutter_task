@@ -5,7 +5,7 @@ import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/tabs/add_ads_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/tabs/chat_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/tabs/home_screen.dart';
-import 'package:otex/features/main_layer/view/screens/home_screen/tabs/user_account_screen.dart';
+import 'package:otex/features/main_layer/view/screens/home_screen/tabs/user_profile_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/tabs/user_ads_screen.dart';
 
 import '../../../../../core/resources/app_colors.dart';
@@ -26,7 +26,7 @@ class _MainLayerScreenState extends State<MainLayerScreen> {
     const ChatScreen(),
     const AddAdsScreen(),
     const UserAdsScreen(),
-    const UserAccountScreen(),
+    const UserProfileScreen(),
   ];
   int currentIndex = 0;
 

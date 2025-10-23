@@ -12,8 +12,8 @@ class AppAssets {
       'assets/icons/home_screen_icons/user_account_tab_icon.svg';
   static const String bottomNavBarTabIndicator =
       'assets/icons/home_screen_icons/bottom_nav_bar_tab_indicator.svg';
-  static const String arrowBackIcon =
-      'assets/icons/home_screen_icons/arrow_back_icon.svg';
+  static const String arrowForwardIcon =
+      'assets/icons/home_screen_icons/arrow_forward_icon.svg';
   static const String rightIcon =
       'assets/icons/home_screen_icons/right_icon.svg';
   static const String percentIcon =
@@ -24,6 +24,18 @@ class AppAssets {
   static const String cartIcon = 'assets/icons/home_screen_icons/cart_icon.svg';
   static const String rightPadgeIcon =
       'assets/icons/home_screen_icons/right_padge_icon.svg';
+  static const String arrowBackIcon =
+      'assets/icons/profile_screen_icons/arrow_back_icon.svg';
+  static const String earthIcon =
+      'assets/icons/profile_screen_icons/earth_icon.svg';
+  static const String pinIcon =
+      'assets/icons/profile_screen_icons/pin_icon.svg';
+  static const String rocketIcon =
+      'assets/icons/profile_screen_icons/rocket_icon.svg';
+  static const String specialAdsPadgeIcon =
+      'assets/icons/profile_screen_icons/special_ads_padge_icon.svg';
+  static const String timeIcon =
+      'assets/icons/profile_screen_icons/time_icon.svg';
 
   //png images
   static const String manImage =

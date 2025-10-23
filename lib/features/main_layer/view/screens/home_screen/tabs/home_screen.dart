@@ -4,10 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
-import 'package:otex/features/main_layer/view/screens/home_screen/widgets/Custom_tab_bar.dart';
-import 'package:otex/features/main_layer/view/screens/home_screen/widgets/categories_tab_bar.dart';
+import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/Custom_tab_bar.dart';
+import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/categories_tab_bar.dart';
 
-import '../widgets/product_card.dart';
+import '../widgets/home_screen_widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SvgPicture.asset(
-                          AppAssets.arrowBackIcon,
+                          AppAssets.arrowForwardIcon,
                           height: 24.h,
                           width: 24.w,
                           colorFilter: ColorFilter.mode(
