@@ -256,7 +256,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ),
                   SizedBox(width: 12.w),
                   SvgPicture.asset(
-                    AppAssets.arrowBackIcon,
+                    AppAssets.smallArrowBackIcon,
                     height: 24.h,
                     width: 24.w,
                     colorFilter: ColorFilter.mode(
@@ -480,7 +480,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
             SizedBox(height: 199.h),
-            Divider(),
+            Divider(height: 0,),
             SizedBox(height: 12.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.r),

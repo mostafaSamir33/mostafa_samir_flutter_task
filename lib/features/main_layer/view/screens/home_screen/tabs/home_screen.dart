@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
+import 'package:otex/features/main_layer/view/screens/filter_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/Custom_tab_bar.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/categories_tab_bar.dart';
 
@@ -41,9 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: CustomScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: SizedBox(height: 45.h)),
             SliverToBoxAdapter(
@@ -55,26 +56,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(
-                          AppAssets.arrowForwardIcon,
-                          height: 24.h,
-                          width: 24.w,
-                          colorFilter: ColorFilter.mode(
-                            AppColors.black.withValues(alpha: 0.5),
-                            BlendMode.srcIn,
+                    GestureDetector(
+                      onTap:
+                          () => Navigator.of(
+                            context,
+                          ).pushNamed(FilterScreen.routeName),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SvgPicture.asset(
+                            AppAssets.arrowForwardIcon,
+                            height: 24.h,
+                            width: 24.w,
+                            colorFilter: ColorFilter.mode(
+                              AppColors.black.withValues(alpha: 0.5),
+                              BlendMode.srcIn,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 4.w),
-                        Text(
-                          'الكل',
-                          style: CustomTextStyles.style16w700.copyWith(
-                            color: AppColors.black.withValues(alpha: 0.5),
+                          SizedBox(width: 4.w),
+                          Text(
+                            'الكل',
+                            style: CustomTextStyles.style16w700.copyWith(
+                              color: AppColors.black.withValues(alpha: 0.5),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Text(
                       'أستكشف العروض',
@@ -142,7 +149,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SliverToBoxAdapter(child: SizedBox(height: 33.h)),
-
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16.r),
               sliver: SliverToBoxAdapter(

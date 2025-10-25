@@ -21,7 +21,7 @@ class CustomTabBar extends StatelessWidget {
         border: Border.all(
           color:
               isActive
-                  ? Color(0xff3B4CF2).withValues(alpha: 0.1)
+                  ? AppColors.blue3.withValues(alpha: 0.1)
                   : AppColors.black.withValues(alpha: 0.1),
           width: 1.w,
         ),

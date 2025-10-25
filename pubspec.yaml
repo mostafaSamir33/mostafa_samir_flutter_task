@@ -64,6 +64,7 @@ flutter:
      - assets/icons/home_screen_icons/
      - assets/images/home_screen_images/
      - assets/icons/profile_screen_icons/
+     - assets/icons/filter_screen_icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

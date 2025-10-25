@@ -24,7 +24,7 @@ class AppAssets {
   static const String cartIcon = 'assets/icons/home_screen_icons/cart_icon.svg';
   static const String rightPadgeIcon =
       'assets/icons/home_screen_icons/right_padge_icon.svg';
-  static const String arrowBackIcon =
+  static const String smallArrowBackIcon =
       'assets/icons/profile_screen_icons/arrow_back_icon.svg';
   static const String earthIcon =
       'assets/icons/profile_screen_icons/earth_icon.svg';
@@ -36,6 +36,14 @@ class AppAssets {
       'assets/icons/profile_screen_icons/special_ads_padge_icon.svg';
   static const String timeIcon =
       'assets/icons/profile_screen_icons/time_icon.svg';
+  static const String closeIcon =
+      'assets/icons/filter_screen_icons/close_icon.svg';
+  static const String handCarryHouseIcon =
+      'assets/icons/filter_screen_icons/hand_carry_house_icon.svg';
+  static const String locationIcon =
+      'assets/icons/filter_screen_icons/location_icon.svg';
+  static const String smallArrowForwardIcon =
+      'assets/icons/filter_screen_icons/small_arrow_forward_icon.svg';
 
   //png images
   static const String manImage =
