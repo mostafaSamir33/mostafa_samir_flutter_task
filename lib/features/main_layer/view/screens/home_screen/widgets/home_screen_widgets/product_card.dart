@@ -4,11 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
+import 'package:otex/features/main_layer/model/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  final String productCardImage;
+  final ProductModel productModel;
 
-  const ProductCard({super.key, required this.productCardImage});
+  const ProductCard({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class ProductCard extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Image.asset(
-              productCardImage,
+              productModel.imagePath,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -54,7 +55,7 @@ class ProductCard extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                              'جاكيت من الصوف مناسب',
+                              productModel.name,
                               style: CustomTextStyles.style14w500.copyWith(
                                 color: AppColors.darkBlue,
                               ),
@@ -84,7 +85,7 @@ class ProductCard extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               children: [
                                 Text(
-                                  '32,000,000 جم/',
+                                  '${productModel.discountedPrice} جم/',
                                   style: CustomTextStyles.style14w500.copyWith(
                                     color: AppColors.orange,
                                   ),
@@ -97,7 +98,7 @@ class ProductCard extends StatelessWidget {
                                       alignment: Alignment.centerRight,
                                       children: [
                                         Text(
-                                          '60,000,000',
+                                          productModel.originalPrice,
                                           style: CustomTextStyles.style12w400
                                               .copyWith(
                                                 color: AppColors.darkBlue
@@ -134,7 +135,7 @@ class ProductCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'تم بيع 3.3k+',
+                            'تم بيع ${productModel.salesCount}',
                             style: CustomTextStyles.style10w400.copyWith(
                               color: AppColors.darkBlue.withValues(alpha: 0.5),
                             ),
