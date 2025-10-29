@@ -4,41 +4,54 @@ import '../../model/models/filter_model.dart';
 import '../../model/models/package_model.dart';
 import '../../model/models/product_model.dart';
 
-abstract class AppState {
-  const AppState();
+abstract class AppStates {
+  const AppStates();
 }
 
-class AppInitial extends AppState {}
+class AppInitial extends AppStates {}
 
-class AppLoading extends AppState {}
+class AppDataLoading extends AppStates {}
 
-class HomeDataLoaded extends AppState {
+class AppDataError extends AppStates {
+  final String message;
+
+  const AppDataError(this.message);
+}
+
+//home data
+class HomeDataSuccessLoaded extends AppStates {
   final List<CategoryModel> categories;
   final List<ProductModel> products;
   final List<AppTextModel> appTexts;
 
-  const HomeDataLoaded({
+  const HomeDataSuccessLoaded({
     required this.categories,
     required this.products,
     required this.appTexts,
   });
 }
 
-class PackagesDataLoaded extends AppState {
+//packages data
+class PackagesDataSuccessLoaded extends AppStates {
   final List<PackageModel> packages;
   final List<AppTextModel> appTexts;
 
-  const PackagesDataLoaded({required this.packages, required this.appTexts});
+  const PackagesDataSuccessLoaded({
+    required this.packages,
+    required this.appTexts,
+  });
 }
 
-class FilterDataLoaded extends AppState {
+
+//filter data
+class FilterDataSuccessLoaded extends AppStates {
   final List<FilterModel> kindOptions;
   final List<FilterModel> roomsOptions;
   final List<FilterModel> paymentOptions;
   final List<FilterModel> conditionOptions;
   final List<AppTextModel> appTexts;
 
-  const FilterDataLoaded({
+  const FilterDataSuccessLoaded({
     required this.kindOptions,
     required this.roomsOptions,
     required this.paymentOptions,
@@ -47,8 +60,3 @@ class FilterDataLoaded extends AppState {
   });
 }
 
-class AppError extends AppState {
-  final String message;
-
-  const AppError(this.message);
-}

@@ -10,11 +10,6 @@ class PackageRepository {
     return maps.map((map) => PackageModel.fromMap(map)).toList();
   }
 
-  // Future<int> insertPackage(PackageModel package) async {
-  //   final db = await _dbHelper.database;
-  //   return await db.insert('packages', package.toMap());
-  // }
-
   Future<void> insertPackages(List<PackageModel> packages) async {
     final db = await _dbHelper.database;
     final batch = db.batch();

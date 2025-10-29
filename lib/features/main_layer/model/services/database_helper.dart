@@ -24,15 +24,6 @@ class DatabaseHelper {
   }
 
   Future<void> _createTables(Database db, int version) async {
-    // Home Screen Tabs
-    await db.execute('''
-      CREATE TABLE home_tabs(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        is_active INTEGER DEFAULT 0
-      )
-    ''');
-
     // Categories
     await db.execute('''
       CREATE TABLE categories(
@@ -47,13 +38,11 @@ class DatabaseHelper {
       CREATE TABLE products(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        description TEXT,
-        original_price REAL NOT NULL,
-        discounted_price REAL NOT NULL,
+        original_price TEXT NOT NULL,
+        discounted_price TEXT NOT NULL,
         image_path TEXT NOT NULL,
         category_id INTEGER,
-        sales_count INTEGER DEFAULT 0,
-        is_featured INTEGER DEFAULT 0
+        sales_count TEXT NOT NULL
       )
     ''');
 
@@ -62,10 +51,8 @@ class DatabaseHelper {
       CREATE TABLE packages(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        price REAL NOT NULL,
+        price TEXT NOT NULL,
         views_count INTEGER,
-        validity_days INTEGER,
-        boost_frequency_days INTEGER,
         is_featured INTEGER DEFAULT 0,
         features TEXT,
         tape_text TEXT
@@ -88,8 +75,7 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         screen_name TEXT NOT NULL,
         text_key TEXT NOT NULL,
-        text_value TEXT NOT NULL,
-        text_direction TEXT DEFAULT 'rtl'
+        text_value TEXT NOT NULL
       )
     ''');
   }

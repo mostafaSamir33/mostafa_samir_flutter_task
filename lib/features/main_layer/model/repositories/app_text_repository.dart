@@ -14,22 +14,17 @@ class AppTextRepository {
     return maps.map((map) => AppTextModel.fromMap(map)).toList();
   }
 
-  Future<String> getTextByKey(String screenName, String textKey) async {
-    final db = await _dbHelper.database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'app_texts',
-      where: 'screen_name = ? AND text_key = ?',
-      whereArgs: [screenName, textKey],
-    );
-    if (maps.isNotEmpty) {
-      return maps.first['text_value'];
-    }
-    return '';
-  }
-
-  // Future<int> insertAppText(AppTextModel appText) async {
+  // Future<String> getTextByKey(String screenName, String textKey) async {
   //   final db = await _dbHelper.database;
-  //   return await db.insert('app_texts', appText.toMap());
+  //   final List<Map<String, dynamic>> maps = await db.query(
+  //     'app_texts',
+  //     where: 'screen_name = ? AND text_key = ?',
+  //     whereArgs: [screenName, textKey],
+  //   );
+  //   if (maps.isNotEmpty) {
+  //     return maps.first['text_value'];
+  //   }
+  //   return '';
   // }
 
   Future<void> insertAppTexts(List<AppTextModel> appTexts) async {

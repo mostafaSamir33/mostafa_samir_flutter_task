@@ -14,11 +14,6 @@ class FilterRepository {
     return maps.map((map) => FilterModel.fromMap(map)).toList();
   }
 
-  // Future<int> insertFilterOption(FilterModel filter) async {
-  //   final db = await _dbHelper.database;
-  //   return await db.insert('filter_options', filter.toMap());
-  // }
-
   Future<void> insertFilterOptions(List<FilterModel> filters) async {
     final db = await _dbHelper.database;
     final batch = db.batch();

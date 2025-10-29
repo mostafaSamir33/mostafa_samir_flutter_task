@@ -80,12 +80,12 @@ class ProductCard extends StatelessWidget {
                             width: 24.w,
                           ),
                           SizedBox(width: 8.w),
-                          Expanded(
+                          Flexible(
                             child: Row(
                               textDirection: TextDirection.rtl,
                               children: [
                                 Text(
-                                  '${productModel.discountedPrice} جم/',
+                                  '${productModel.discountedPrice}جم/',
                                   style: CustomTextStyles.style14w500.copyWith(
                                     color: AppColors.orange,
                                   ),

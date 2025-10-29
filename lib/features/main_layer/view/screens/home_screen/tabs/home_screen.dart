@@ -4,14 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
+import 'package:otex/core/resources/app_general_methods.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
 import 'package:otex/features/main_layer/model/models/app_text_model.dart';
 import 'package:otex/features/main_layer/view/screens/filter_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/Custom_tab_bar.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/categories_tab_bar.dart';
 
-import '../../../../view_model/cubit/home_cubit.dart';
-import '../../../../view_model/cubit/home_cubit_states.dart';
+import '../../../../view_model/cubit/app_cubit.dart';
+import '../../../../view_model/cubit/app_cubit_states.dart';
 import '../widgets/home_screen_widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,57 +23,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AppCubit>().loadHomeData();
-  }
-
-  String _getTextByKey({
-    required List<AppTextModel> appTexts,
-    required String textKey,
-  }) {
-    final text = appTexts.firstWhere(
-      (text) => text.textKey == textKey,
-      orElse:
-          () => AppTextModel(
-            screenName: 'fallback',
-            textKey: textKey,
-            textValue: textKey,
-          ),
-    );
-    return text.textValue;
-  }
-
   List<String> _getTabTexts({required List<AppTextModel> appTexts}) {
     return [
-      _getTextByKey(appTexts: appTexts, textKey: 'all_offers'),
-      _getTextByKey(appTexts: appTexts, textKey: 'clothes'),
-      _getTextByKey(appTexts: appTexts, textKey: 'accessories'),
-      _getTextByKey(appTexts: appTexts, textKey: 'electronics'),
+      AppGeneralMethods.getTextByKey(appTexts: appTexts, textKey: 'all_offers'),
+      AppGeneralMethods.getTextByKey(appTexts: appTexts, textKey: 'clothes'),
+      AppGeneralMethods.getTextByKey(
+        appTexts: appTexts,
+        textKey: 'accessories',
+      ),
+      AppGeneralMethods.getTextByKey(
+        appTexts: appTexts,
+        textKey: 'electronics',
+      ),
     ];
   }
 
   int selectedTabIndex = 0;
 
-  List<String> productCardsImages = [
-    AppAssets.brownShirtImage,
-    AppAssets.blackJacketImage,
-    AppAssets.blackJacketImage,
-    AppAssets.shoesImage,
-    AppAssets.blackJacketImage,
-    AppAssets.shoesImage,
-    AppAssets.brownShirtImage,
-    AppAssets.blackJacketImage,
-  ];
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     context.read<AppCubit>().loadHomeData();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        if (state is AppError) {
-          return Text('Error: ${state.message}');
-        } else if (state is HomeDataLoaded) {
+        if (state is AppDataError) {
+          return Center(
+            child: Text(
+              'Error: ${state.message}',
+              style: CustomTextStyles.style16w500.copyWith(
+                color: AppColors.black,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          );
+        } else if (state is HomeDataSuccessLoaded) {
           final tabs = _getTabTexts(appTexts: state.appTexts);
           return Scaffold(
             body: SafeArea(
@@ -107,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 SizedBox(width: 4.w),
                                 Text(
-                                  _getTextByKey(
+                                  AppGeneralMethods.getTextByKey(
                                     appTexts: state.appTexts,
                                     textKey: 'all',
                                   ),
@@ -121,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            _getTextByKey(
+                            AppGeneralMethods.getTextByKey(
                               appTexts: state.appTexts,
                               textKey: 'explore_offers',
                             ),
@@ -137,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Directionality(
                       textDirection: TextDirection.rtl,
                       child: SizedBox(
-                        height: 41.h,
+                        height: 42.h,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 16.r),
@@ -206,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              _getTextByKey(
+                              AppGeneralMethods.getTextByKey(
                                 appTexts: state.appTexts,
                                 textKey: 'order',
                               ),
@@ -218,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               children: [
                                 Text(
-                                  _getTextByKey(
+                                  AppGeneralMethods.getTextByKey(
                                     appTexts: state.appTexts,
                                     textKey: 'free_shipping',
                                   ),
@@ -266,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         }
-        return CircularProgressIndicator(color: AppColors.blue);
+        return Center(child: CircularProgressIndicator(color: AppColors.blue));
       },
     );
   }

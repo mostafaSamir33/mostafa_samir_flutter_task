@@ -10,11 +10,6 @@ class CategoryRepository {
     return maps.map((map) => CategoryModel.fromMap(map)).toList();
   }
 
-  // Future<int> insertCategory(CategoryModel category) async {
-  //   final db = await _dbHelper.database;
-  //   return await db.insert('categories', category.toMap());
-  // }
-
   Future<void> insertCategories(List<CategoryModel> categories) async {
     final db = await _dbHelper.database;
     final batch = db.batch();

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:otex/core/resources/app_general_methods.dart';
 
 import '../../../../../../../core/resources/app_colors.dart';
 import '../../../../../../../core/resources/custom_text_styles.dart';
-
+import '../../../../../model/models/app_text_model.dart';
 
 class DoubleOfViewsText extends StatelessWidget {
-  const DoubleOfViewsText({super.key});
+  final List<AppTextModel> appTexts;
+
+  const DoubleOfViewsText({super.key, required this.appTexts});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,10 @@ class DoubleOfViewsText extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'ضعف عدد',
+                  AppGeneralMethods.getTextByKey(
+                    appTexts: appTexts,
+                    textKey: 'double_number',
+                  ),
                   style: CustomTextStyles.style12w400.copyWith(
                     color: AppColors.darkBlue,
                     height: 1,
@@ -47,7 +53,10 @@ class DoubleOfViewsText extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'المشاهدات',
+                  AppGeneralMethods.getTextByKey(
+                    appTexts: appTexts,
+                    textKey: 'views',
+                  ),
                   style: CustomTextStyles.style12w400.copyWith(
                     color: AppColors.darkBlue,
                     height: 1.h,

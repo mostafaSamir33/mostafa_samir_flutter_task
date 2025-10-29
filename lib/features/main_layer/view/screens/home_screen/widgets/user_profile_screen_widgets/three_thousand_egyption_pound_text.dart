@@ -3,9 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../core/resources/app_colors.dart';
 import '../../../../../../../core/resources/custom_text_styles.dart';
+import '../../../../../view_model/cubit/app_cubit_states.dart';
 
 class ThreeThousandEgyptionPoundText extends StatelessWidget {
-  const ThreeThousandEgyptionPoundText({super.key});
+  final PackagesDataSuccessLoaded state;
+
+  const ThreeThousandEgyptionPoundText({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class ThreeThousandEgyptionPoundText extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  '3,000',
+                  state.packages[0].price,
                   style: CustomTextStyles.style16w700.copyWith(
                     color: AppColors.orange,
                   ),

@@ -10,21 +10,6 @@ class ProductRepository {
     return maps.map((map) => ProductModel.fromMap(map)).toList();
   }
 
-  // Future<List<ProductModel>> getProductsByCategory(int categoryId) async {
-  //   final db = await _dbHelper.database;
-  //   final List<Map<String, dynamic>> maps = await db.query(
-  //     'products',
-  //     where: 'category_id = ?',
-  //     whereArgs: [categoryId],
-  //   );
-  //   return maps.map((map) => ProductModel.fromMap(map)).toList();
-  // }
-
-  // Future<int> insertProduct(ProductModel product) async {
-  //   final db = await _dbHelper.database;
-  //   return await db.insert('products', product.toMap());
-  // }
-
   Future<void> insertProducts(List<ProductModel> products) async {
     final db = await _dbHelper.database;
     final batch = db.batch();

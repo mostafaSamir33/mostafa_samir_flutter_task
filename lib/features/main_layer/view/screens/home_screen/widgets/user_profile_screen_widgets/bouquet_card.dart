@@ -4,6 +4,7 @@ import 'package:otex/core/resources/app_colors.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/widgets/user_profile_screen_widgets/three_thousand_egyption_pound_text.dart';
 
+import '../../../../../view_model/cubit/app_cubit_states.dart';
 import 'bouquet_card_tape.dart';
 import 'double_of_views_text.dart';
 
@@ -13,6 +14,7 @@ class BouquetCard extends StatefulWidget {
   final int? doubleViewsContainerNumber;
   final Widget bouquetDetails;
   final String? bouquetCardTapeText;
+  final PackagesDataSuccessLoaded state;
 
   const BouquetCard({
     super.key,
@@ -21,6 +23,7 @@ class BouquetCard extends StatefulWidget {
     this.doubleViewsContainerNumber,
     required this.bouquetDetails,
     this.bouquetCardTapeText,
+    required this.state,
   });
 
   @override
@@ -70,7 +73,7 @@ class _BouquetCardState extends State<BouquetCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ThreeThousandEgyptionPoundText(),
+                      ThreeThousandEgyptionPoundText(state: widget.state,),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,7 +172,9 @@ class _BouquetCardState extends State<BouquetCard> {
                                   ],
                                 ),
                                 SizedBox(height: 4.h),
-                                DoubleOfViewsText(),
+                                DoubleOfViewsText(
+                                  appTexts: widget.state.appTexts,
+                                ),
                               ],
                             ),
                           ),

@@ -28,15 +28,15 @@ class DataInitializer {
 
   Future<void> initializeAllData() async {
     final existingCategories = await categoryRepository.getAllCategories();
-    // if (existingCategories.isEmpty) {
+    if (existingCategories.isEmpty) {
       await _initializeCategories();
       await _initializeProducts();
       await _initializePackages();
       await _initializeFilterOptions();
       await _initializeAppTexts();
-    // } else {
-    //   return;
-    // }
+    } else {
+      return;
+    }
   }
 
   Future<void> _initializeCategories() async {
@@ -70,7 +70,7 @@ class DataInitializer {
         discountedPrice: '32,000,000',
         imagePath: AppAssets.blackJacketImage,
         categoryId: 1,
-        salesCount: 'تم بيع 3.3k+',
+        salesCount: '3.3k+',
       ),
       ProductModel(
         name: 'جاكيت من الصوف مناسب',
@@ -78,7 +78,7 @@ class DataInitializer {
         discountedPrice: '32,000,000',
         imagePath: AppAssets.blackJacketImage,
         categoryId: 1,
-        salesCount: 'تم بيع 3.3k+',
+        salesCount: '3.3k+',
       ),
       ProductModel(
         name: 'جاكيت من الصوف مناسب',
@@ -86,7 +86,7 @@ class DataInitializer {
         discountedPrice: '32,000,000',
         imagePath: AppAssets.shoesImage,
         categoryId: 1,
-        salesCount: 'تم بيع 3.3k+',
+        salesCount: '3.3k+',
       ),
       ProductModel(
         name: 'جاكيت من الصوف مناسب',
@@ -94,7 +94,7 @@ class DataInitializer {
         discountedPrice: '32,000,000',
         imagePath: AppAssets.blackJacketImage,
         categoryId: 1,
-        salesCount: 'تم بيع 3.3k+',
+        salesCount: '3.3k+',
       ),
       ProductModel(
         name: 'جاكيت من الصوف مناسب',
@@ -102,7 +102,7 @@ class DataInitializer {
         discountedPrice: '32,000,000',
         imagePath: AppAssets.shoesImage,
         categoryId: 1,
-        salesCount: 'تم بيع 3.3k+',
+        salesCount: '3.3k+',
       ),
       ProductModel(
         name: 'جاكيت من الصوف مناسب',
@@ -110,7 +110,7 @@ class DataInitializer {
         discountedPrice: '32,000,000',
         imagePath: AppAssets.brownShirtImage,
         categoryId: 1,
-        salesCount: 'تم بيع 3.3k+',
+        salesCount: '3.3k+',
       ),
       ProductModel(
         name: 'جاكيت من الصوف مناسب',
@@ -118,7 +118,7 @@ class DataInitializer {
         discountedPrice: '32,000,000',
         imagePath: AppAssets.blackJacketImage,
         categoryId: 1,
-        salesCount: 'تم بيع 3.3k+',
+        salesCount: '3.3k+',
       ),
     ];
 
@@ -129,13 +129,13 @@ class DataInitializer {
     final packages = [
       PackageModel(
         name: 'أساسية',
-        price: '3000',
+        price: '3,000',
         isFeatured: false,
         features: ['صلاحية الأعلان 30 يوم'],
       ),
       PackageModel(
         name: 'أكسترا',
-        price: '3000',
+        price: '3,000',
         viewsCount: 7,
         isFeatured: true,
         features: [
@@ -147,7 +147,7 @@ class DataInitializer {
       ),
       PackageModel(
         name: 'بلس',
-        price: '3000',
+        price: '3,000',
         viewsCount: 18,
         isFeatured: true,
         features: [
@@ -165,7 +165,7 @@ class DataInitializer {
       ),
       PackageModel(
         name: 'سوبر',
-        price: '3000',
+        price: '3,000',
         viewsCount: 24,
         isFeatured: false,
         features: [
@@ -265,6 +265,61 @@ class DataInitializer {
   }
 
   Future<void> _initializeAppTexts() async {
+    // bottom Nav bar Texts
+    final bottomNavTexts = [
+      AppTextModel(
+        screenName: 'home',
+        textKey: 'home_layer',
+        textValue: 'الرئيسية',
+      ),
+      AppTextModel(
+        screenName: 'home',
+        textKey: 'chat_layer',
+        textValue: 'محادثة',
+      ),
+      AppTextModel(
+        screenName: 'home',
+        textKey: 'add_ads',
+        textValue: 'أضف أعلان',
+      ),
+      AppTextModel(
+        screenName: 'home',
+        textKey: 'user_ads',
+        textValue: 'أعلاناتى',
+      ),
+      AppTextModel(
+        screenName: 'home',
+        textKey: 'user_profile',
+        textValue: 'حسابى',
+      ),
+      // add them to packages screen
+      AppTextModel(
+        screenName: 'packages',
+        textKey: 'home_layer',
+        textValue: 'الرئيسية',
+      ),
+      AppTextModel(
+        screenName: 'packages',
+        textKey: 'chat_layer',
+        textValue: 'محادثة',
+      ),
+      AppTextModel(
+        screenName: 'packages',
+        textKey: 'add_ads',
+        textValue: 'أضف أعلان',
+      ),
+      AppTextModel(
+        screenName: 'packages',
+        textKey: 'user_ads',
+        textValue: 'أعلاناتى',
+      ),
+      AppTextModel(
+        screenName: 'packages',
+        textKey: 'user_profile',
+        textValue: 'حسابى',
+      ),
+    ];
+
     // Home Screen Texts
     final homeTexts = [
       AppTextModel(
@@ -299,31 +354,6 @@ class DataInitializer {
         textKey: 'electronics',
         textValue: 'الكترونيات',
       ),
-      AppTextModel(
-        screenName: 'home',
-        textKey: 'home_layer',
-        textValue: 'الرئيسية',
-      ),
-      AppTextModel(
-        screenName: 'home',
-        textKey: 'chat_layer',
-        textValue: 'محادثة',
-      ),
-      AppTextModel(
-        screenName: 'home',
-        textKey: 'add_ads',
-        textValue: 'أضف أعلان',
-      ),
-      AppTextModel(
-        screenName: 'home',
-        textKey: 'user_ads',
-        textValue: 'أعلاناتى',
-      ),
-      AppTextModel(
-        screenName: 'home',
-        textKey: 'user_profile',
-        textValue: 'حسابى',
-      ),
     ];
 
     // Packages Screen Texts
@@ -340,8 +370,13 @@ class DataInitializer {
       ),
       AppTextModel(
         screenName: 'packages',
-        textKey: 'double_views_number',
-        textValue: 'ضعف عدد المشاهدات',
+        textKey: 'double_number',
+        textValue: 'ضعف عدد',
+      ),
+      AppTextModel(
+        screenName: 'packages',
+        textKey: 'views',
+        textValue: 'المشاهدات',
       ),
       AppTextModel(
         screenName: 'packages',
@@ -439,6 +474,7 @@ class DataInitializer {
     ];
 
     await appTextRepository.insertAppTexts([
+      ...bottomNavTexts,
       ...homeTexts,
       ...packagesTexts,
       ...filterTexts,
