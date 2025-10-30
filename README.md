@@ -1,6 +1,8 @@
 # Otex App (Flutter Task)
 
-A Flutter application developed by **Mostafa Samir**, demonstrating a clean and scalable architecture using **MVVM**, **Cubit state management**, a **Responsive UI**, and **SQLite** for local data persistence.
+A Flutter application developed by **Mostafa Samir**, demonstrating a clean and scalable
+architecture using **MVVM**, **Cubit state management**, a **Responsive UI**, and **SQLite** for
+local data persistence.
 
 ---
 
@@ -21,27 +23,28 @@ A Flutter application developed by **Mostafa Samir**, demonstrating a clean and 
 - **Responsive UI** – dynamically adapts layout to screen size
 
 ---
+
 ## 📸 Screenshots
 
 ### 🏠 Home Screen
 
 <p align="center">
-  <img src="screenshots/splash_light.jpg" alt="splash_light" width="200" hspace="10" />
-  <img src="screenshots/splash_dark.jpg" alt="splash_dark" width="200" hspace="10" />
+  <img src="screen_shots/home_screen_1.jpg" alt="splash_light" width="200" hspace="10" />
+  <img src="screen_shots/home_screen_2.jpg" alt="splash_dark" width="200" hspace="10" />
 </p>
 
 ### 🎁 Packages Screen
 
 <p align="center">
-  <img src="screenshots/onboarding_page1_light.jpg" alt="onboarding_page1_light" width="200" hspace="10" />
-  <img src="screenshots/onboarding_page1_dark.jpg" alt="onboarding_page1_dark" width="200" hspace="10" />
+  <img src="screen_shots/packages_screen_1.jpg" alt="onboarding_page1_light" width="200" hspace="10" />
+  <img src="screen_shots/packages_screen_2.jpg" alt="onboarding_page1_dark" width="200" hspace="10" />
 </p>
 
 ### 🔑 Filter Screen
 
 <p align="center">
-  <img src="screenshots/onboarding_page1_light.jpg" alt="onboarding_page1_light" width="200" hspace="10" />
-  <img src="screenshots/onboarding_page1_dark.jpg" alt="onboarding_page1_dark" width="200" hspace="10" />
+  <img src="screen_shots/filter_screen_1.jpg" alt="onboarding_page1_light" width="200" hspace="10" />
+  <img src="screen_shots/filter_screen_2.jpg" alt="onboarding_page1_dark" width="200" hspace="10" />
 </p>
 
 ---
