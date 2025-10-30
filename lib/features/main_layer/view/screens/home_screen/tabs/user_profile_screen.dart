@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
 import 'package:otex/core/resources/app_general_methods.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
+import 'package:otex/features/main_layer/model/models/app_icon_model.dart';
 import 'package:otex/features/main_layer/view_model/cubit/app_cubit.dart';
 import 'package:otex/features/main_layer/view_model/cubit/app_cubit_states.dart';
 
@@ -20,6 +20,14 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AppCubit>().loadPackagesData();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppStates>(
@@ -64,7 +72,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         ),
                         SizedBox(width: 12.w),
                         SvgPicture.asset(
-                          AppAssets.smallArrowBackIcon,
+                          AppGeneralMethods.getIconByKey(
+                            appIcons: state.appIcons,
+                            iconKey: 'smallArrowBackIcon',
+                          ),
                           height: 24.h,
                           width: 24.w,
                           colorFilter: ColorFilter.mode(
@@ -110,15 +121,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             ),
                           ),
                           SizedBox(width: 8.w),
-                          SvgPicture.asset(
-                            AppAssets.timeIcon,
-                            height: 24.h,
-                            width: 24.w,
-                            colorFilter: ColorFilter.mode(
-                              AppColors.darkBlue,
-                              BlendMode.srcIn,
-                            ),
-                          ),
+                          timeIcon(userProfileScreenIcons: state.appIcons),
                         ],
                       ),
                     ),
@@ -149,15 +152,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                               ),
                               SizedBox(width: 8.w),
-                              SvgPicture.asset(
-                                AppAssets.timeIcon,
-                                height: 24.h,
-                                width: 24.w,
-                                colorFilter: ColorFilter.mode(
-                                  AppColors.darkBlue,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
+                              timeIcon(userProfileScreenIcons: state.appIcons),
                             ],
                           ),
                           Row(
@@ -176,7 +171,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               ),
                               SizedBox(width: 8.w),
                               SvgPicture.asset(
-                                AppAssets.rocketIcon,
+                                AppGeneralMethods.getIconByKey(
+                                  appIcons: state.appIcons,
+                                  iconKey: 'rocketIcon',
+                                ),
                                 height: 24.h,
                                 width: 24.w,
                                 colorFilter: ColorFilter.mode(
@@ -216,15 +214,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                               ),
                               SizedBox(width: 8.w),
-                              SvgPicture.asset(
-                                AppAssets.pinIcon,
-                                height: 24.h,
-                                width: 24.w,
-                                colorFilter: ColorFilter.mode(
-                                  AppColors.darkBlue,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
+                              pinIcon(userProfileScreenIcons: state.appIcons),
                             ],
                           ),
                         ],
@@ -243,6 +233,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       bouquetDetails: _extraAndPlusBouquetDetails(
                         thirdAndFourthPackagesFeaturesData:
                             thirdPackageData.features,
+                        userProfileScreenIcons: state.appIcons,
                       ),
                     ),
                   ),
@@ -257,6 +248,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       bouquetDetails: _extraAndPlusBouquetDetails(
                         thirdAndFourthPackagesFeaturesData:
                             fourthPackageData.features,
+                        userProfileScreenIcons: state.appIcons,
                       ),
                     ),
                   ),
@@ -329,7 +321,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            AppAssets.arrowForwardIcon,
+                            AppGeneralMethods.getIconByKey(
+                              appIcons: state.appIcons,
+                              iconKey: 'arrowForwardIcon',
+                            ),
                             height: 24.h,
                             width: 24.w,
                             colorFilter: ColorFilter.mode(
@@ -363,6 +358,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   Widget _extraAndPlusBouquetDetails({
     required List<String> thirdAndFourthPackagesFeaturesData,
+    required List<AppIconModel> userProfileScreenIcons,
   }) {
     return Column(
       spacing: 8.h,
@@ -382,15 +378,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
             SizedBox(width: 8.w),
-            SvgPicture.asset(
-              AppAssets.timeIcon,
-              height: 24.h,
-              width: 24.w,
-              colorFilter: ColorFilter.mode(
-                AppColors.darkBlue,
-                BlendMode.srcIn,
-              ),
-            ),
+            timeIcon(userProfileScreenIcons: userProfileScreenIcons),
           ],
         ),
         Row(
@@ -409,7 +397,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ),
             SizedBox(width: 8.w),
             SvgPicture.asset(
-              AppAssets.rocketIcon,
+              AppGeneralMethods.getIconByKey(
+                appIcons: userProfileScreenIcons,
+                iconKey: 'rocketIcon',
+              ),
               height: 24.h,
               width: 24.w,
               colorFilter: ColorFilter.mode(
@@ -447,15 +438,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
             SizedBox(width: 8.w),
-            SvgPicture.asset(
-              AppAssets.pinIcon,
-              height: 24.h,
-              width: 24.w,
-              colorFilter: ColorFilter.mode(
-                AppColors.darkBlue,
-                BlendMode.srcIn,
-              ),
-            ),
+            pinIcon(userProfileScreenIcons: userProfileScreenIcons),
           ],
         ),
 
@@ -475,7 +458,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ),
             SizedBox(width: 8.w),
             SvgPicture.asset(
-              AppAssets.earthIcon,
+              AppGeneralMethods.getIconByKey(
+                appIcons: userProfileScreenIcons,
+                iconKey: 'earthIcon',
+              ),
               height: 24.h,
               width: 24.w,
               colorFilter: ColorFilter.mode(
@@ -501,7 +487,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ),
             SizedBox(width: 8.w),
             SvgPicture.asset(
-              AppAssets.specialAdsPadgeIcon,
+              AppGeneralMethods.getIconByKey(
+                appIcons: userProfileScreenIcons,
+                iconKey: 'specialAdsPadgeIcon',
+              ),
               height: 24.h,
               width: 24.w,
               colorFilter: ColorFilter.mode(
@@ -526,15 +515,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
             SizedBox(width: 8.w),
-            SvgPicture.asset(
-              AppAssets.pinIcon,
-              height: 24.h,
-              width: 24.w,
-              colorFilter: ColorFilter.mode(
-                AppColors.darkBlue,
-                BlendMode.srcIn,
-              ),
-            ),
+            pinIcon(userProfileScreenIcons: userProfileScreenIcons),
           ],
         ),
         Row(
@@ -565,18 +546,34 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
             SizedBox(width: 8.w),
-            SvgPicture.asset(
-              AppAssets.pinIcon,
-              height: 24.h,
-              width: 24.w,
-              colorFilter: ColorFilter.mode(
-                AppColors.darkBlue,
-                BlendMode.srcIn,
-              ),
-            ),
+            pinIcon(userProfileScreenIcons: userProfileScreenIcons),
           ],
         ),
       ],
+    );
+  }
+
+  Widget timeIcon({required List<AppIconModel> userProfileScreenIcons}) {
+    return SvgPicture.asset(
+      AppGeneralMethods.getIconByKey(
+        appIcons: userProfileScreenIcons,
+        iconKey: 'timeIcon',
+      ),
+      height: 24.h,
+      width: 24.w,
+      colorFilter: ColorFilter.mode(AppColors.darkBlue, BlendMode.srcIn),
+    );
+  }
+
+  Widget pinIcon({required List<AppIconModel> userProfileScreenIcons}) {
+    return SvgPicture.asset(
+      AppGeneralMethods.getIconByKey(
+        appIcons: userProfileScreenIcons,
+        iconKey: 'pinIcon',
+      ),
+      height: 24.h,
+      width: 24.w,
+      colorFilter: ColorFilter.mode(AppColors.darkBlue, BlendMode.srcIn),
     );
   }
 }

@@ -1,9 +1,11 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
+
   factory DatabaseHelper() => _instance;
+
   DatabaseHelper._internal();
 
   static Database? _database;
@@ -16,11 +18,7 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'otex_database.db');
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _createTables,
-    );
+    return await openDatabase(path, version: 1, onCreate: _createTables);
   }
 
   Future<void> _createTables(Database db, int version) async {
@@ -78,6 +76,16 @@ class DatabaseHelper {
         text_value TEXT NOT NULL
       )
     ''');
+
+    // App Icons
+    await db.execute('''
+    CREATE TABLE app_icons(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      screen_name TEXT NOT NULL,
+      icon_key TEXT NOT NULL,
+      icon_path TEXT NOT NULL
+    )
+  ''');
   }
 
   Future<void> close() async {

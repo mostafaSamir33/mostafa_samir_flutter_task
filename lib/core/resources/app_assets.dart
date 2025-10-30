@@ -12,6 +12,7 @@ class AppAssets {
       'assets/icons/home_screen_icons/user_account_tab_icon.svg';
   static const String bottomNavBarTabIndicator =
       'assets/icons/home_screen_icons/bottom_nav_bar_tab_indicator.svg';
+
   static const String arrowForwardIcon =
       'assets/icons/home_screen_icons/arrow_forward_icon.svg';
   static const String rightIcon =
@@ -24,6 +25,7 @@ class AppAssets {
   static const String cartIcon = 'assets/icons/home_screen_icons/cart_icon.svg';
   static const String rightPadgeIcon =
       'assets/icons/home_screen_icons/right_padge_icon.svg';
+
   static const String smallArrowBackIcon =
       'assets/icons/profile_screen_icons/arrow_back_icon.svg';
   static const String earthIcon =
@@ -36,6 +38,7 @@ class AppAssets {
       'assets/icons/profile_screen_icons/special_ads_padge_icon.svg';
   static const String timeIcon =
       'assets/icons/profile_screen_icons/time_icon.svg';
+
   static const String closeIcon =
       'assets/icons/filter_screen_icons/close_icon.svg';
   static const String handCarryHouseIcon =
@@ -44,6 +47,8 @@ class AppAssets {
       'assets/icons/filter_screen_icons/location_icon.svg';
   static const String smallArrowForwardIcon =
       'assets/icons/filter_screen_icons/small_arrow_forward_icon.svg';
+
+
 
   //png images
   static const String manImage =
@@ -62,6 +67,7 @@ class AppAssets {
       'assets/images/home_screen_images/brown_shirt_image.png';
   static const String shoesImage =
       'assets/images/home_screen_images/shoes_image.png';
+
   static const String talatMostafaLogoIcon =
       'assets/images/home_screen_images/talat_mostafa_logo_icon.png';
 }

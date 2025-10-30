@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otex/core/resources/app_assets.dart';
+import 'package:otex/features/main_layer/model/models/app_icon_model.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/tabs/add_ads_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/tabs/chat_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/tabs/home_screen.dart';
@@ -26,6 +27,10 @@ class MainLayerScreen extends StatefulWidget {
 }
 
 class _MainLayerScreenState extends State<MainLayerScreen> {
+  final PageController _pageController = PageController();
+
+  int currentIndex = 0;
+
   final List<Widget> tabs = [
     const HomeScreen(),
     const ChatScreen(),
@@ -34,29 +39,32 @@ class _MainLayerScreenState extends State<MainLayerScreen> {
     const UserProfileScreen(),
   ];
 
-  int currentIndex = 0;
-
   List<AppTextModel> _cachedAppTexts = [];
+  List<AppIconModel> _cachedAppIcons = [];
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {
-        if (state is HomeDataSuccessLoaded) {
-          _cachedAppTexts = state.appTexts;
-        } else if (state is PackagesDataSuccessLoaded) {
-          _cachedAppTexts = state.appTexts;
-        }
-      },
+    return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
         if (state is HomeDataSuccessLoaded) {
           _cachedAppTexts = state.appTexts;
+          _cachedAppIcons = state.appIcons;
         } else if (state is PackagesDataSuccessLoaded) {
           _cachedAppTexts = state.appTexts;
+          _cachedAppIcons = state.appIcons;
         }
 
         return Scaffold(
-          body: _buildBody(state: state),
+          body: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: tabs,
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
           bottomNavigationBar: Directionality(
             textDirection: TextDirection.rtl,
             child: _buildCustomBottomNavBar(),
@@ -66,36 +74,11 @@ class _MainLayerScreenState extends State<MainLayerScreen> {
     );
   }
 
-  Future<void> _onTabSelected({required int index}) async {
+  void _onTabSelected({required int index}) {
     setState(() {
       currentIndex = index;
     });
-
-    final cubit = context.read<AppCubit>();
-    switch (index) {
-      case 0: // Home
-        await cubit.loadHomeData();
-        break;
-      case 4: // Profile/Packages
-        await cubit.loadPackagesData();
-        break;
-    }
-  }
-
-  Widget _buildBody({required AppStates state}) {
-    if (state is AppDataError) {
-      return Center(
-        child: Text(
-          'Error: ${state.message}',
-          style: CustomTextStyles.style16w500.copyWith(color: AppColors.black),
-          textAlign: TextAlign.center,
-        ),
-      );
-    } else if (state is HomeDataSuccessLoaded ||
-        state is PackagesDataSuccessLoaded) {
-      return IndexedStack(index: currentIndex, children: tabs);
-    }
-    return Center(child: CircularProgressIndicator(color: AppColors.blue));
+    _pageController.jumpToPage(index);
   }
 
   Widget _buildCustomBottomNavBar() {
@@ -120,27 +103,27 @@ class _MainLayerScreenState extends State<MainLayerScreen> {
             children: [
               _buildNavItem(
                 0,
-                AppAssets.homeTabIcon,
+                _getNavIcon(iconKey: 'homeTabIcon'),
                 _getNavText(textKey: 'home_layer'),
               ),
               _buildNavItem(
                 1,
-                AppAssets.chatTabIcon,
+                _getNavIcon(iconKey: 'chatTabIcon'),
                 _getNavText(textKey: 'chat_layer'),
               ),
               _buildNavItem(
                 2,
-                AppAssets.addAdsTabIcon,
+                _getNavIcon(iconKey: 'addAdsTabIcon'),
                 _getNavText(textKey: 'add_ads'),
               ),
               _buildNavItem(
                 3,
-                AppAssets.userAdsTabIcon,
+                _getNavIcon(iconKey: 'userAdsTabIcon'),
                 _getNavText(textKey: 'user_ads'),
               ),
               _buildNavItem(
                 4,
-                AppAssets.userAccountTabIcon,
+                _getNavIcon(iconKey: 'userAccountTabIcon'),
                 _getNavText(textKey: 'user_profile'),
               ),
             ],
@@ -148,6 +131,37 @@ class _MainLayerScreenState extends State<MainLayerScreen> {
         ),
       ),
     );
+  }
+
+  String _getNavIcon({required String iconKey}) {
+    if (_cachedAppIcons.isNotEmpty) {
+      return AppGeneralMethods.getIconByKey(
+        appIcons: _cachedAppIcons,
+        iconKey: iconKey,
+      );
+    } else {
+      //Fallback icons to prevent showing close icon
+      return _getFallbackIcon(iconKey);
+    }
+  }
+
+  String _getFallbackIcon(String iconKey) {
+    switch (iconKey) {
+      case 'homeTabIcon':
+        return AppAssets.homeTabIcon;
+      case 'chatTabIcon':
+        return AppAssets.chatTabIcon;
+      case 'addAdsTabIcon':
+        return AppAssets.addAdsTabIcon;
+      case 'userAdsTabIcon':
+        return AppAssets.userAdsTabIcon;
+      case 'userAccountTabIcon':
+        return AppAssets.userAccountTabIcon;
+      case 'bottomNavBarTabIndicator':
+        return AppAssets.bottomNavBarTabIndicator;
+      default:
+        return iconKey;
+    }
   }
 
   String _getNavText({required String textKey}) {
@@ -201,9 +215,7 @@ class _MainLayerScreenState extends State<MainLayerScreen> {
 
     return Expanded(
       child: InkWell(
-        onTap: () {
-          _onTabSelected(index: index);
-        },
+        onTap: () => _onTabSelected(index: index),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -233,7 +245,7 @@ class _MainLayerScreenState extends State<MainLayerScreen> {
                 left: 0,
                 right: 0,
                 child: SvgPicture.asset(
-                  AppAssets.bottomNavBarTabIndicator,
+                  _getNavIcon(iconKey: 'bottomNavBarTabIndicator'),
                   width: double.infinity,
                   height: 46.h,
                   colorFilter: ColorFilter.mode(

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
 import 'package:otex/core/resources/app_general_methods.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
-import 'package:otex/features/main_layer/model/models/app_text_model.dart';
 import 'package:otex/features/main_layer/view/screens/filter_screen.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/Custom_tab_bar.dart';
 import 'package:otex/features/main_layer/view/screens/home_screen/widgets/home_screen_widgets/categories_tab_bar.dart';
 
+import '../../../../../../main.dart';
+import '../../../../model/models/app_text_model.dart';
 import '../../../../view_model/cubit/app_cubit.dart';
 import '../../../../view_model/cubit/app_cubit_states.dart';
 import '../widgets/home_screen_widgets/product_card.dart';
@@ -22,7 +22,41 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with RouteAware {
+  int selectedTabIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadHomeData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)! as PageRoute);
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPopNext() {
+    final cubit = context.read<AppCubit>();
+    if (cubit.state is! HomeDataSuccessLoaded) {
+      cubit.loadHomeData();
+    }
+  }
+
+  void _loadHomeData() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AppCubit>().loadHomeData();
+    });
+  }
+
   List<String> _getTabTexts({required List<AppTextModel> appTexts}) {
     return [
       AppGeneralMethods.getTextByKey(appTexts: appTexts, textKey: 'all_offers'),
@@ -37,16 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     ];
   }
-
-  int selectedTabIndex = 0;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     context.read<AppCubit>().loadHomeData();
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -79,15 +103,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap:
-                                () => Navigator.of(
-                                  context,
-                                ).pushNamed(FilterScreen.routeName),
+                            onTap: () {
+                              Navigator.of(
+                                context,
+                              ).pushNamed(FilterScreen.routeName);
+                            },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 SvgPicture.asset(
-                                  AppAssets.arrowForwardIcon,
+                                  AppGeneralMethods.getIconByKey(
+                                    appIcons: state.appIcons,
+                                    iconKey: 'arrowForwardIcon',
+                                  ),
                                   height: 24.h,
                                   width: 24.w,
                                   colorFilter: ColorFilter.mode(
@@ -218,7 +246,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 SizedBox(width: 4.w),
                                 SvgPicture.asset(
-                                  AppAssets.rightIcon,
+                                  AppGeneralMethods.getIconByKey(
+                                    appIcons: state.appIcons,
+                                    iconKey: 'rightIcon',
+                                  ),
                                   height: 24.h,
                                   width: 24.w,
                                 ),
@@ -247,7 +278,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: state.products.length,
                       itemBuilder: (BuildContext context, int index) {
                         final product = state.products[index];
-                        return ProductCard(productModel: product);
+                        return ProductCard(
+                          productModel: product,
+                          appIcons: state.appIcons,
+                        );
                       },
                     ),
                   ),

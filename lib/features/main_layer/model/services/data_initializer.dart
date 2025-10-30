@@ -1,4 +1,6 @@
 import 'package:otex/core/resources/app_assets.dart';
+import 'package:otex/features/main_layer/model/models/app_icon_model.dart';
+import 'package:otex/features/main_layer/model/repositories/app_icon_repository.dart';
 
 import '../models/app_text_model.dart';
 import '../models/category_model.dart';
@@ -17,6 +19,7 @@ class DataInitializer {
   final PackageRepository packageRepository;
   final FilterRepository filterRepository;
   final AppTextRepository appTextRepository;
+  final AppIconRepository appIconRepository;
 
   DataInitializer({
     required this.categoryRepository,
@@ -24,6 +27,7 @@ class DataInitializer {
     required this.packageRepository,
     required this.filterRepository,
     required this.appTextRepository,
+    required this.appIconRepository,
   });
 
   Future<void> initializeAllData() async {
@@ -34,6 +38,7 @@ class DataInitializer {
       await _initializePackages();
       await _initializeFilterOptions();
       await _initializeAppTexts();
+      await _initializeAppIcons();
     } else {
       return;
     }
@@ -188,77 +193,21 @@ class DataInitializer {
 
   Future<void> _initializeFilterOptions() async {
     final allFilterOptions = [
-      FilterModel(filterType: 'kind', optionName: 'الكل', isSelected: true),
-      FilterModel(
-        filterType: 'kind',
-        optionName: 'توين هاوس',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'kind',
-        optionName: 'فيلا منفصلة',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'kind',
-        optionName: 'تاون هاوس',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'number_of_rooms',
-        optionName: '4 غرف',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'number_of_rooms',
-        optionName: '5 غرف+',
-        isSelected: true,
-      ),
-      FilterModel(
-        filterType: 'number_of_rooms',
-        optionName: 'الكل',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'number_of_rooms',
-        optionName: 'غرفتين',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'number_of_rooms',
-        optionName: '3 غرف',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'payment_method',
-        optionName: 'أى',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'payment_method',
-        optionName: 'تقسيط',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'payment_method',
-        optionName: 'كاش',
-        isSelected: true,
-      ),
-      FilterModel(
-        filterType: 'property_condition',
-        optionName: 'أى',
-        isSelected: false,
-      ),
-      FilterModel(
-        filterType: 'property_condition',
-        optionName: 'جاهز',
-        isSelected: true,
-      ),
-      FilterModel(
-        filterType: 'property_condition',
-        optionName: 'قيد الأنشاء',
-        isSelected: false,
-      ),
+      FilterModel(filterType: 'kind', optionName: 'الكل'),
+      FilterModel(filterType: 'kind', optionName: 'توين هاوس'),
+      FilterModel(filterType: 'kind', optionName: 'فيلا منفصلة'),
+      FilterModel(filterType: 'kind', optionName: 'تاون هاوس'),
+      FilterModel(filterType: 'number_of_rooms', optionName: '4 غرف'),
+      FilterModel(filterType: 'number_of_rooms', optionName: '5 غرف+'),
+      FilterModel(filterType: 'number_of_rooms', optionName: 'الكل'),
+      FilterModel(filterType: 'number_of_rooms', optionName: 'غرفتين'),
+      FilterModel(filterType: 'number_of_rooms', optionName: '3 غرف'),
+      FilterModel(filterType: 'payment_method', optionName: 'أى'),
+      FilterModel(filterType: 'payment_method', optionName: 'تقسيط'),
+      FilterModel(filterType: 'payment_method', optionName: 'كاش'),
+      FilterModel(filterType: 'property_condition', optionName: 'أى'),
+      FilterModel(filterType: 'property_condition', optionName: 'جاهز'),
+      FilterModel(filterType: 'property_condition', optionName: 'قيد الأنشاء'),
     ];
 
     await filterRepository.insertFilterOptions(allFilterOptions);
@@ -267,6 +216,7 @@ class DataInitializer {
   Future<void> _initializeAppTexts() async {
     // bottom Nav bar Texts
     final bottomNavTexts = [
+      // add to home screen
       AppTextModel(
         screenName: 'home',
         textKey: 'home_layer',
@@ -292,7 +242,7 @@ class DataInitializer {
         textKey: 'user_profile',
         textValue: 'حسابى',
       ),
-      // add them to packages screen
+      // add to packages screen
       AppTextModel(
         screenName: 'packages',
         textKey: 'home_layer',
@@ -478,6 +428,189 @@ class DataInitializer {
       ...homeTexts,
       ...packagesTexts,
       ...filterTexts,
+    ]);
+  }
+
+  Future<void> _initializeAppIcons() async {
+    //bottom nav bar icons
+    final bottomNavIcons = [
+      //add to home screen
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'homeTabIcon',
+        iconPath: AppAssets.homeTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'chatTabIcon',
+        iconPath: AppAssets.chatTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'addAdsTabIcon',
+        iconPath: AppAssets.addAdsTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'userAdsTabIcon',
+        iconPath: AppAssets.userAdsTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'userAccountTabIcon',
+        iconPath: AppAssets.userAccountTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'bottomNavBarTabIndicator',
+        iconPath: AppAssets.bottomNavBarTabIndicator,
+      ),
+
+      //add to packages screen
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'homeTabIcon',
+        iconPath: AppAssets.homeTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'chatTabIcon',
+        iconPath: AppAssets.chatTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'addAdsTabIcon',
+        iconPath: AppAssets.addAdsTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'userAdsTabIcon',
+        iconPath: AppAssets.userAdsTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'userAccountTabIcon',
+        iconPath: AppAssets.userAccountTabIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'bottomNavBarTabIndicator',
+        iconPath: AppAssets.bottomNavBarTabIndicator,
+      ),
+    ];
+
+    //home screen icons
+    final homeScreenIcons = [
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'arrowForwardIcon',
+        iconPath: AppAssets.arrowForwardIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'rightIcon',
+        iconPath: AppAssets.rightIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'percentIcon',
+        iconPath: AppAssets.percentIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'heartIcon',
+        iconPath: AppAssets.heartIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'fireIcon',
+        iconPath: AppAssets.fireIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'cartIcon',
+        iconPath: AppAssets.cartIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'rightPadgeIcon',
+        iconPath: AppAssets.rightPadgeIcon,
+      ),
+      AppIconModel(
+        screenName: 'home',
+        iconKey: 'talatMostafaLogoIcon',
+        iconPath: AppAssets.talatMostafaLogoIcon,
+      ),
+    ];
+
+    //packages screen icons
+    final packagesScreenIcons = [
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'smallArrowBackIcon',
+        iconPath: AppAssets.smallArrowBackIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'earthIcon',
+        iconPath: AppAssets.earthIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'pinIcon',
+        iconPath: AppAssets.pinIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'rocketIcon',
+        iconPath: AppAssets.rocketIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'specialAdsPadgeIcon',
+        iconPath: AppAssets.specialAdsPadgeIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'timeIcon',
+        iconPath: AppAssets.timeIcon,
+      ),
+      AppIconModel(
+        screenName: 'packages',
+        iconKey: 'arrowForwardIcon',
+        iconPath: AppAssets.arrowForwardIcon,
+      ),
+    ];
+
+    //filter screen icons
+    final filterScreenIcons = [
+      AppIconModel(
+        screenName: 'filter',
+        iconKey: 'closeIcon',
+        iconPath: AppAssets.closeIcon,
+      ),
+      AppIconModel(
+        screenName: 'filter',
+        iconKey: 'handCarryHouseIcon',
+        iconPath: AppAssets.handCarryHouseIcon,
+      ),
+      AppIconModel(
+        screenName: 'filter',
+        iconKey: 'locationIcon',
+        iconPath: AppAssets.locationIcon,
+      ),
+      AppIconModel(
+        screenName: 'filter',
+        iconKey: 'smallArrowForwardIcon',
+        iconPath: AppAssets.smallArrowForwardIcon,
+      ),
+    ];
+
+    await appIconRepository.insertIcons([
+      ...bottomNavIcons,
+      ...homeScreenIcons,
+      ...packagesScreenIcons,
+      ...filterScreenIcons,
     ]);
   }
 }

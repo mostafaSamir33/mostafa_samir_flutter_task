@@ -1,25 +1,25 @@
-import '../models/app_text_model.dart';
+import '../models/app_icon_model.dart';
 import '../services/database_helper.dart';
 
-class AppTextRepository {
+class AppIconRepository {
   final DatabaseHelper _dbHelper = DatabaseHelper();
 
-  Future<List<AppTextModel>> getAppTextsByScreen(String screenName) async {
+  Future<List<AppIconModel>> getIconsByScreen(String screenName) async {
     final db = await _dbHelper.database;
     final List<Map<String, dynamic>> maps = await db.query(
-      'app_texts',
+      'app_icons',
       where: 'screen_name = ?',
       whereArgs: [screenName],
     );
-    return maps.map((map) => AppTextModel.fromMap(map)).toList();
+    return maps.map((map) => AppIconModel.fromMap(map)).toList();
   }
 
-  Future<void> insertAppTexts(List<AppTextModel> appTexts) async {
+  Future<void> insertIcons(List<AppIconModel> icons) async {
     final db = await _dbHelper.database;
     final batch = db.batch();
 
-    for (var appText in appTexts) {
-      batch.insert('app_texts', appText.toMap());
+    for (var icon in icons) {
+      batch.insert('app_icons', icon.toMap());
     }
 
     await batch.commit();

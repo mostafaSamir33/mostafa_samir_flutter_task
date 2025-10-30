@@ -1,3 +1,5 @@
+import 'package:otex/features/main_layer/model/models/app_icon_model.dart';
+
 import '../../model/models/app_text_model.dart';
 import '../../model/models/category_model.dart';
 import '../../model/models/filter_model.dart';
@@ -23,11 +25,13 @@ class HomeDataSuccessLoaded extends AppStates {
   final List<CategoryModel> categories;
   final List<ProductModel> products;
   final List<AppTextModel> appTexts;
+  final List<AppIconModel> appIcons;
 
   const HomeDataSuccessLoaded({
     required this.categories,
     required this.products,
     required this.appTexts,
+    required this.appIcons,
   });
 }
 
@@ -35,13 +39,14 @@ class HomeDataSuccessLoaded extends AppStates {
 class PackagesDataSuccessLoaded extends AppStates {
   final List<PackageModel> packages;
   final List<AppTextModel> appTexts;
+  final List<AppIconModel> appIcons;
 
   const PackagesDataSuccessLoaded({
     required this.packages,
     required this.appTexts,
+    required this.appIcons,
   });
 }
-
 
 //filter data
 class FilterDataSuccessLoaded extends AppStates {
@@ -50,6 +55,7 @@ class FilterDataSuccessLoaded extends AppStates {
   final List<FilterModel> paymentOptions;
   final List<FilterModel> conditionOptions;
   final List<AppTextModel> appTexts;
+  final List<AppIconModel> appIcons;
 
   const FilterDataSuccessLoaded({
     required this.kindOptions,
@@ -57,6 +63,6 @@ class FilterDataSuccessLoaded extends AppStates {
     required this.paymentOptions,
     required this.conditionOptions,
     required this.appTexts,
+    required this.appIcons,
   });
 }
-

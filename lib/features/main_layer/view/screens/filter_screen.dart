@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
 import 'package:otex/core/resources/app_general_methods.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
@@ -21,22 +20,9 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  List<String> kindTabs = ['الكل', 'توين هاوس', 'فيلا منفصلة', 'تاون هاوس'];
   int selectedKindTabsIndex = 0;
-
-  List<String> numberOfRoomsTabs = [
-    '4 غرف',
-    '5 غرف+',
-    'الكل',
-    'غرفتين',
-    '3 غرف',
-  ];
   int selectedNumberOfRoomsTabsIndex = 1;
-
-  List<String> payWayTabs = ['أى', 'تقسيط', 'كاش'];
   int selectedPayWayTabsIndex = 2;
-
-  List<String> propertyConditionTabs = ['أى', 'جاهز', 'قيد الأنشاء'];
   int selectedPropertyConditionTabsIndex = 1;
 
   @override
@@ -64,6 +50,29 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
           );
         } else if (state is FilterDataSuccessLoaded) {
+          List<String> kindTabs = [
+            state.kindOptions[0].optionName,
+            state.kindOptions[1].optionName,
+            state.kindOptions[2].optionName,
+            state.kindOptions[3].optionName,
+          ];
+          List<String> numberOfRoomsTabs = [
+            state.roomsOptions[0].optionName,
+            state.roomsOptions[1].optionName,
+            state.roomsOptions[2].optionName,
+            state.roomsOptions[3].optionName,
+            state.roomsOptions[4].optionName,
+          ];
+          List<String> payWayTabs = [
+            state.paymentOptions[0].optionName,
+            state.paymentOptions[1].optionName,
+            state.paymentOptions[2].optionName,
+          ];
+          List<String> propertyConditionTabs = [
+            state.conditionOptions[0].optionName,
+            state.conditionOptions[1].optionName,
+            state.conditionOptions[2].optionName,
+          ];
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
@@ -106,7 +115,10 @@ class _FilterScreenState extends State<FilterScreen> {
                               InkWell(
                                 onTap: () => Navigator.of(context).pop(),
                                 child: SvgPicture.asset(
-                                  AppAssets.closeIcon,
+                                  AppGeneralMethods.getIconByKey(
+                                    appIcons: state.appIcons,
+                                    iconKey: 'closeIcon',
+                                  ),
                                   height: 24.h,
                                   width: 24.w,
                                   colorFilter: ColorFilter.mode(
@@ -186,7 +198,10 @@ class _FilterScreenState extends State<FilterScreen> {
                                 child: Padding(
                                   padding: EdgeInsets.all(8.r),
                                   child: SvgPicture.asset(
-                                    AppAssets.handCarryHouseIcon,
+                                    AppGeneralMethods.getIconByKey(
+                                      appIcons: state.appIcons,
+                                      iconKey: 'handCarryHouseIcon',
+                                    ),
                                     height: 24.h,
                                     width: 24.w,
                                     colorFilter: ColorFilter.mode(
@@ -212,7 +227,10 @@ class _FilterScreenState extends State<FilterScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            AppAssets.smallArrowForwardIcon,
+                            AppGeneralMethods.getIconByKey(
+                              appIcons: state.appIcons,
+                              iconKey: 'smallArrowForwardIcon',
+                            ),
                             height: 24.h,
                             width: 24.w,
                             colorFilter: ColorFilter.mode(
@@ -253,7 +271,10 @@ class _FilterScreenState extends State<FilterScreen> {
                                   vertical: 3.5.r,
                                 ).copyWith(left: 8.r),
                                 child: SvgPicture.asset(
-                                  AppAssets.locationIcon,
+                                  AppGeneralMethods.getIconByKey(
+                                    appIcons: state.appIcons,
+                                    iconKey: 'locationIcon',
+                                  ),
                                   height: 24.h,
                                   width: 24.w,
                                   colorFilter: ColorFilter.mode(

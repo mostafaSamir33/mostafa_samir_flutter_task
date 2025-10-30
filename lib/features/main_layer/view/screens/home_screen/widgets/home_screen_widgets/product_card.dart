@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:otex/core/resources/app_assets.dart';
 import 'package:otex/core/resources/app_colors.dart';
+import 'package:otex/core/resources/app_general_methods.dart';
 import 'package:otex/core/resources/custom_text_styles.dart';
+import 'package:otex/features/main_layer/model/models/app_icon_model.dart';
 import 'package:otex/features/main_layer/model/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel productModel;
+  final List<AppIconModel> appIcons;
 
-  const ProductCard({super.key, required this.productModel});
+  const ProductCard({
+    super.key,
+    required this.productModel,
+    required this.appIcons,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +55,10 @@ class ProductCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SvgPicture.asset(
-                            AppAssets.percentIcon,
+                            AppGeneralMethods.getIconByKey(
+                              appIcons: appIcons,
+                              iconKey: 'percentIcon',
+                            ),
                             height: 20.h,
                             width: 20.w,
                           ),
@@ -75,7 +84,10 @@ class ProductCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SvgPicture.asset(
-                            AppAssets.heartIcon,
+                            AppGeneralMethods.getIconByKey(
+                              appIcons: appIcons,
+                              iconKey: 'heartIcon',
+                            ),
                             height: 24.h,
                             width: 24.w,
                           ),
@@ -143,7 +155,10 @@ class ProductCard extends StatelessWidget {
                           ),
                           SizedBox(width: 4.w),
                           SvgPicture.asset(
-                            AppAssets.fireIcon,
+                            AppGeneralMethods.getIconByKey(
+                              appIcons: appIcons,
+                              iconKey: 'fireIcon',
+                            ),
                             height: 12.h,
                             width: 12.w,
                             colorFilter: ColorFilter.mode(
@@ -163,7 +178,10 @@ class ProductCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Image.asset(
-                        AppAssets.talatMostafaLogoIcon,
+                        AppGeneralMethods.getIconByKey(
+                          appIcons: appIcons,
+                          iconKey: 'talatMostafaLogoIcon',
+                        ),
                         height: 22.h,
                         width: 15.w,
                       ),
@@ -184,7 +202,10 @@ class ProductCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4.r),
                           ),
                           child: SvgPicture.asset(
-                            AppAssets.cartIcon,
+                            AppGeneralMethods.getIconByKey(
+                              appIcons: appIcons,
+                              iconKey: 'cartIcon',
+                            ),
                             height: 16.h,
                             width: 16.w,
                           ),
@@ -192,7 +213,10 @@ class ProductCard extends StatelessWidget {
                       ),
                       Spacer(),
                       SvgPicture.asset(
-                        AppAssets.rightPadgeIcon,
+                        AppGeneralMethods.getIconByKey(
+                          appIcons: appIcons,
+                          iconKey: 'rightPadgeIcon',
+                        ),
                         height: 26.h,
                         width: 26.w,
                       ),
